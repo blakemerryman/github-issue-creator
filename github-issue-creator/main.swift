@@ -26,12 +26,10 @@ let variables = """
 
 let accessToken = ProcessInfo.processInfo.environment["access_token"] ?? ""
 let graphQLEndpointURL = URL(string: "https://api.github.com/graphql")!
-let parameters: [String: Any] = [
-    "query": query,
-    "variables": variables
-]
-
-let request = try! URLRequest(gqlURL: graphQLEndpointURL, authToken: accessToken, parameters: parameters)
+let request = try! URLRequest(gqlURL: graphQLEndpointURL,
+                              authToken: accessToken,
+                              query: query,
+                              variables: variables)
 
 // MARK: - Make Request
 
