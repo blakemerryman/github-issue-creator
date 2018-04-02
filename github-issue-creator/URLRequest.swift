@@ -8,24 +8,35 @@
 
 import Foundation
 
+extension URL {
+
+}
+
 extension URLRequest {
 
-    /// Builds a GraphQL request.
-    init(gqlURL: URL, authToken: String, query: String, variables: String) throws {
-        self.init(url: gqlURL)
-        self.httpMethod = "POST"
-        self.allHTTPHeaderFields = [
-            "Authorization": "bearer \(authToken)",
-            "Content-Type": "application/json"
-        ]
+    private static let githubAPI = "https://api.github.com"
 
-        let parameters: [String: Any] = [
-            "query": query,
-            "variables": variables
+    private init(issuesForRepo repository: String, organization: String, authorization: String) {
+        let url = URL(string: "https://api.github.com/repos/\(organization)/\(repository)/issues")!
+        self.init(url: url)
+        allHTTPHeaderFields = [
+            "Authorization": "token \(authorization)",
+            "Content-Type": "application/json",
+            "Accept": "application/vnd.github.v3+json"
         ]
+    }
 
-        let bodyData = try JSONSerialization.data(withJSONObject: parameters, options: [])
-        httpBody = bodyData
+    static func getIssues(forRepo repository: String, within organization: String, authorization: String) -> URLRequest {
+        var request = URLRequest(issuesForRepo: repository, organization: organization, authorization: authorization)
+        request.httpMethod = "GET"
+        return request
+    }
+
+    static func createIssue(_ issue: Issue, forRepo repository: String, within organization: String, authorization: String) -> URLRequest {
+        var request = URLRequest(issuesForRepo: repository, organization: organization, authorization: authorization)
+        request.httpMethod = "POST"
+        request.httpBody = try! JSONEncoder().encode(issue)
+        return request
     }
 
 }

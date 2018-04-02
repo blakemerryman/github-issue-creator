@@ -8,36 +8,17 @@
 
 import Foundation
 
-// MARK: - Query
-
-let query = """
-query($organization_name:String!) {
-    organization(login: $organization_name) {
-        login
-    }
-}
-"""
-
-// MARK: - Variables
-
-let variables = """
-{
-    "organization_name": "NashvilleCocoaHeads"
-}
-"""
-
-// MARK: - Build Request
-
 let accessToken = ProcessInfo.processInfo.environment["access_token"] ?? ""
-let graphQLEndpointURL = URL(string: "https://api.github.com/graphql")!
-let request = try! URLRequest(gqlURL: graphQLEndpointURL,
-                              authToken: accessToken,
-                              query: query,
-                              variables: variables)
+let organization = "NashvilleCocoaHeads"
+let repository = "mission-control"
 
 // MARK: - Make Request
 
-let dataTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
+//let getIssuesRequest: URLRequest = .getIssues(forRepo: repository, within: organization, authorization: accessToken)
+
+let createIssueRequest: URLRequest = .createIssue(testIssue, forRepo: repository, within: organization, authorization: accessToken)
+
+let dataTask = URLSession.shared.dataTask(with: createIssueRequest) { (data, response, error) in
     guard let data = data else {
         print(error!.localizedDescription)
         exit(EXIT_FAILURE)
