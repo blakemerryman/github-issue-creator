@@ -8,7 +8,7 @@
 
 import Foundation
 
-// MARK: - Request Info
+// MARK: - Query
 
 let query = """
 query($organization_name:String!) {
@@ -18,11 +18,15 @@ query($organization_name:String!) {
 }
 """
 
+// MARK: - Variables
+
 let variables = """
 {
     "organization_name": "NashvilleCocoaHeads"
 }
 """
+
+// MARK: - Build Request
 
 let accessToken = ProcessInfo.processInfo.environment["access_token"] ?? ""
 let graphQLEndpointURL = URL(string: "https://api.github.com/graphql")!
@@ -36,7 +40,7 @@ let request = try! URLRequest(gqlURL: graphQLEndpointURL,
 let dataTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
     guard let data = data else {
         print(error!.localizedDescription)
-        return
+        exit(EXIT_FAILURE)
     }
     let json = try? JSONSerialization.jsonObject(with: data, options: [])
     print(json!)
