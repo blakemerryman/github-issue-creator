@@ -8,17 +8,17 @@
 
 import Foundation
 
-let accessToken = ProcessInfo.processInfo.environment["access_token"] ?? ""
-let organization = "NashvilleCocoaHeads"
-let repository = "mission-control"
+let accessToken = ProcessInfo.processInfo.environment["github_access_token"] ?? ""
+let organization = ProcessInfo.processInfo.environment["github_organization"] ?? ""
+let repository = ProcessInfo.processInfo.environment["github_repository"] ?? ""
 
 // MARK: - Make Request
 
-//let getIssuesRequest: URLRequest = .getIssues(forRepo: repository, within: organization, authorization: accessToken)
+let getIssuesRequest: URLRequest = .getIssues(forRepo: repository, within: organization, authorization: accessToken)
 
-let createIssueRequest: URLRequest = .createIssue(testIssue, forRepo: repository, within: organization, authorization: accessToken)
+//let createIssueRequest: URLRequest = .createIssue(testIssue, forRepo: repository, within: organization, authorization: accessToken)
 
-let dataTask = URLSession.shared.dataTask(with: createIssueRequest) { (data, response, error) in
+let dataTask = URLSession.shared.dataTask(with: getIssuesRequest) { (data, response, error) in
     guard let data = data else {
         print(error!.localizedDescription)
         exit(EXIT_FAILURE)
