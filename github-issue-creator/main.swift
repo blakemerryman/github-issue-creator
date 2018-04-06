@@ -16,15 +16,13 @@ let repository = ProcessInfo.processInfo.environment["github_repository"] ?? ""
 
 print("Started at \(Date()).")
 
-var operations = Issue.defaultIssues.map { issue -> Operation in
+let operations = Issue.defaultIssues.map { issue -> Operation in
     let request: URLRequest = .createIssue(issue, forRepo: repository, within: organization, authorization: accessToken)
     let operation = NetworkDataOperation(session: .shared, request: request)
     return operation
 }
 
 let queue = OperationQueue()
+queue.maxConcurrentOperationCount = 1 // serial queue
 queue.addOperations(operations, waitUntilFinished: true)
-
 print("Finished at \(Date()).")
-
-RunLoop.main.run()
