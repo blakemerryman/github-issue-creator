@@ -38,10 +38,13 @@ class AsynchronousOperation: Operation {
         }
         set {
             willChangeValue(forKey: _state.keyPath)
+            willChangeValue(forKey: newValue.keyPath)
             stateLock.lock()
+            let oldValue = _state
             _state = newValue
             stateLock.unlock()
             didChangeValue(forKey: _state.keyPath)
+            didChangeValue(forKey: oldValue.keyPath)
         }
     }
 
