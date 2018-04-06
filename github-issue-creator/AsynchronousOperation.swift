@@ -74,6 +74,7 @@ class AsynchronousOperation: Operation {
 
     func completeOperation() {
         state = .finished
+        completionBlock?()
     }
 
 }

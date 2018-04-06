@@ -19,6 +19,9 @@ print("Started at \(Date()).")
 let operations = Issue.defaultIssues.map { issue -> Operation in
     let request: URLRequest = .createIssue(issue, forRepo: repository, within: organization, authorization: accessToken)
     let operation = NetworkDataOperation(session: .shared, request: request)
+    operation.completionBlock = {
+        print("Operation completed at \(Date())")
+    }
     return operation
 }
 
