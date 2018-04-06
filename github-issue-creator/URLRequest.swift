@@ -8,10 +8,6 @@
 
 import Foundation
 
-extension URL {
-
-}
-
 extension URLRequest {
 
     private static let githubAPI = "https://api.github.com"

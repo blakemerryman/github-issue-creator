@@ -14,19 +14,17 @@ let repository = ProcessInfo.processInfo.environment["github_repository"] ?? ""
 
 // MARK: - Make Request
 
-let getIssuesRequest: URLRequest = .getIssues(forRepo: repository, within: organization, authorization: accessToken)
+print("Started at \(Date()).")
 
-//let createIssueRequest: URLRequest = .createIssue(testIssue, forRepo: repository, within: organization, authorization: accessToken)
-
-let dataTask = URLSession.shared.dataTask(with: getIssuesRequest) { (data, response, error) in
-    guard let data = data else {
-        print(error!.localizedDescription)
-        exit(EXIT_FAILURE)
-    }
-    let json = try? JSONSerialization.jsonObject(with: data, options: [])
-    print(json!)
-    exit(EXIT_SUCCESS)
+var operations = Issue.defaultIssues.map { issue -> Operation in
+    let request: URLRequest = .createIssue(issue, forRepo: repository, within: organization, authorization: accessToken)
+    let operation = NetworkDataOperation(session: .shared, request: request)
+    return operation
 }
 
-dataTask.resume()
+let queue = OperationQueue()
+queue.addOperations(operations, waitUntilFinished: true)
+
+print("Finished at \(Date()).")
+
 RunLoop.main.run()

@@ -10,6 +10,8 @@
 		4600FF18207143DE001E8674 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4600FF17207143DE001E8674 /* main.swift */; };
 		4600FF2120716197001E8674 /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4600FF2020716197001E8674 /* URLRequest.swift */; };
 		4600FF232071F417001E8674 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4600FF222071F417001E8674 /* Issue.swift */; };
+		46C488282076E39A009CB585 /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C488272076E39A009CB585 /* AsynchronousOperation.swift */; };
+		46C4882A2076ED54009CB585 /* NetworkDataOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C488292076ED54009CB585 /* NetworkDataOperation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,6 +31,8 @@
 		4600FF17207143DE001E8674 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		4600FF2020716197001E8674 /* URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
 		4600FF222071F417001E8674 /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
+		46C488272076E39A009CB585 /* AsynchronousOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsynchronousOperation.swift; sourceTree = "<group>"; };
+		46C488292076ED54009CB585 /* NetworkDataOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataOperation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 			children = (
 				4600FF17207143DE001E8674 /* main.swift */,
 				4600FF222071F417001E8674 /* Issue.swift */,
+				46C488272076E39A009CB585 /* AsynchronousOperation.swift */,
+				46C488292076ED54009CB585 /* NetworkDataOperation.swift */,
 				4600FF2020716197001E8674 /* URLRequest.swift */,
 			);
 			path = "github-issue-creator";
@@ -128,7 +134,9 @@
 			files = (
 				4600FF18207143DE001E8674 /* main.swift in Sources */,
 				4600FF2120716197001E8674 /* URLRequest.swift in Sources */,
+				46C4882A2076ED54009CB585 /* NetworkDataOperation.swift in Sources */,
 				4600FF232071F417001E8674 /* Issue.swift in Sources */,
+				46C488282076E39A009CB585 /* AsynchronousOperation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
